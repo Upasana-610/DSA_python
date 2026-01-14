@@ -175,11 +175,6 @@ def productExceptSelf(nums):
 ```python
 class Solution(object):
     def subarraySum(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: int
-        """
         n=len(nums)
         s=0
         prefix_map={0:1}
@@ -196,10 +191,6 @@ class Solution(object):
 ```python
 class Solution(object):
     def merge(self, intervals):
-        """
-        :type intervals: List[List[int]]
-        :rtype: List[List[int]]
-        """
         intervals.sort()
         merged=[intervals[0]]
         for ele in intervals:
@@ -236,4 +227,20 @@ class Solution(object):
             i += 1
             
         return result
+```
+13. Container with most water ( left and right pointer, move the pointer at shorter height, target is to find the two tallest heights with optimum width b/w them as anyways width will only decrease)
+```python
+class Solution(object):
+    def maxArea(self, height):
+        n=len(height)
+        left = 0
+        right = n-1
+        amt=0
+        while left<right:
+            amt=max(min(height[left],height[right])*(right-left),amt)
+            if height[left] > height[right]:
+                right-=1
+            else:
+                left+=1 
+        return amt           
 ```
