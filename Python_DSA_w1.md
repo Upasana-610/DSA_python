@@ -192,3 +192,23 @@ class Solution(object):
                
         return ans
 ```
+11. Merge Intervals ( sort intervals, compare end of merged array last element with start of sorted array current array, update merged)
+```python
+class Solution(object):
+    def merge(self, intervals):
+        """
+        :type intervals: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        intervals.sort()
+        merged=[intervals[0]]
+        for ele in intervals:
+            if ele[0]<= merged[-1][1]:
+                merged[-1][1]=max(ele[1],merged[-1][1])
+            else:
+                merged.append(ele)
+
+        return merged            
+
+
+```
