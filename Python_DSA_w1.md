@@ -212,3 +212,33 @@ class Solution(object):
 
 
 ```
+12. Insert Interval ( add first which end before start of newInterval, then add those which start before end of newInterval, then add rest which start after end of newInterval)
+```python
+class Solution(object):
+    def insert(self, intervals, newInterval):
+        result = []
+        i = 0
+        n = len(intervals)
+        
+        # Phase 1: Add all intervals ending before newInterval starts
+        while i < n and intervals[i][1] < newInterval[0]:
+            result.append(intervals[i])
+            i += 1
+            
+        # Phase 2: Merge all overlapping intervals
+        # While the current interval starts before the newInterval ends
+        while i < n and intervals[i][0] <= newInterval[1]:
+            newInterval[0] = min(newInterval[0], intervals[i][0])
+            newInterval[1] = max(newInterval[1], intervals[i][1])
+            i += 1
+        
+        # Add the final merged newInterval
+        result.append(newInterval)
+        
+        # Phase 3: Add the remaining intervals
+        while i < n:
+            result.append(intervals[i])
+            i += 1
+            
+        return result
+```
