@@ -153,3 +153,42 @@ class Solution(object):
         return longest_streak            
 
 ```
+9. Product Of Array except self (left element product array, right element product array):
+```python
+def productExceptSelf(nums):
+    length = len(nums)
+    answer = [1] * length
+    
+    prefix = 1
+    for i in range(length):
+        answer[i] = prefix
+        prefix *= nums[i]
+        
+    suffix = 1
+    for i in range(length - 1, -1, -1):
+        answer[i] *= suffix
+        suffix *= nums[i]
+        
+    return answer
+```
+10. Subarray Sum equals k ( Traverse array once and check if map contains current prefix sum - k to the left, update subarray count, add to map the current prefix and move on)
+```python
+class Solution(object):
+    def subarraySum(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        n=len(nums)
+        s=0
+        prefix_map={0:1}
+        ans=0
+        for i in range(n):
+            s+=nums[i]
+            if s-k in prefix_map:
+                ans+=prefix_map[s-k]
+            prefix_map[s]= prefix_map.get(s,0)+1
+               
+        return ans
+```
